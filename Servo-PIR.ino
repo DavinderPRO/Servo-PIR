@@ -8,34 +8,34 @@ Servo myservo; // create servo object to control a servo
 
 int sensorValue = 0;  // variable to store the pirSensor status (value)
 uint8_t position = 0; // variable to store the servo position
-bool state = LOW;     // by default, no motion detected
+int state = LOW;      // by default, no motion detected
 
 void setup()
 {
   pinMode(led, OUTPUT);      // initalize LED as an output
   pinMode(pirSensor, INPUT); // initialize pirSensor as an input
-
-  myservo.attach(servoPin); // attaches the servo on pin 9 to the servo object
-                            // Serial.begin(9600);       // initialize serial
+  myservo.attach(servoPin);  // attaches the servo on pin 9 to the servo object
+  myservo.write(position);
+  // Serial.begin(9600); // initialize serial
 }
 
-void setServoMotor(bool state)
+void setServoMotor(int state)
 {
-  if (state)
+
+  while (state == HIGH && position < 180) // goes from 0 degrees to 180 degrees
   {
-    for (position = 0; position <= 180; position += 1) // goes from 0 degrees to 180 degrees
-    {
-      myservo.write(position); // tell servo to go to position in variable 'position'
-      delay(15);
-    }
+    position++;
+    //  Serial.println(position);
+    myservo.write(position); // tell servo to go to position in variable 'position'
+    delay(15);
   }
-  else
+
+  while (state == LOW && position > 0) // goes from 180 degrees to 0 degrees
   {
-    for (position = 180; position >= 0; position -= 1) // goes from 180 degrees to 0 degrees
-    {
-      myservo.write(position); // tell servo to go to position in variable 'position'
-      delay(15);
-    }
+    position--;
+    // Serial.println(position);
+    myservo.write(position);
+    delay(15);
   }
 }
 
@@ -61,7 +61,7 @@ void loop()
     delay(200);             // delay 200 milliseconds
     if (state == HIGH)
     {
-      // Serial.println("Motion stopped!");
+      //  Serial.println("Motion stopped!");
       state = LOW; // update variable state to LOW
       setServoMotor(state);
     }
