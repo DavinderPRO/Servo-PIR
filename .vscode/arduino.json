@@ -1,0 +1,5 @@
+{
+    "sketch": "servo_moto_example.ino",
+    "configuration": "cpu=atmega328",
+    "board": "arduino:avr:diecimila"
+}
