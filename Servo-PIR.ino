@@ -25,7 +25,7 @@ void setServoMotor(int state)
   while (state == HIGH && position < 180) // goes from 0 degrees to 180 degrees
   {
     position++;
-    //  Serial.println(position);
+    // Serial.println(position);
     myservo.write(position); // tell servo to go to position in variable 'position'
     delay(stepper_speed);
   }
@@ -61,7 +61,7 @@ void loop()
     delay(200);             // delay 200 milliseconds
     if (state == HIGH)
     {
-      //  Serial.println("Motion stopped!");
+      // Serial.println("Motion stopped!");
       state = LOW; // update variable state to LOW
       setServoMotor(state);
     }
