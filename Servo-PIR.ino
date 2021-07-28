@@ -1,10 +1,10 @@
 #include <Servo.h>
 Servo myservo; // create servo object to control a servo
 
-#define led (uint8_t)13      // the pin that the LED is atteched to
-#define pirSensor (uint8_t)2 // the pin that the pirSensor is atteched to
-#define servoPin (uint8_t)9  // the pin that the pirSensor is atteched to
-//#define stepper_speed (uint8_t)15 // the pin that the pirSensor is atteched to
+#define led (uint8_t)13           // the pin that the LED is atteched to
+#define pirSensor (uint8_t)2      // the pin that the pirSensor is atteched to
+#define servoPin (uint8_t)9       // the pin that the pirSensor is atteched to
+#define stepper_speed (uint8_t)15 // the pin that the pirSensor is atteched to
 
 int sensorValue = 0;  // variable to store the pirSensor status (value)
 uint8_t position = 0; // variable to store the servo position
@@ -27,7 +27,7 @@ void setServoMotor(int state)
     position++;
     //  Serial.println(position);
     myservo.write(position); // tell servo to go to position in variable 'position'
-    delay(15);
+    delay(stepper_speed);
   }
 
   while (state == LOW && position > 0) // goes from 180 degrees to 0 degrees
@@ -35,7 +35,7 @@ void setServoMotor(int state)
     position--;
     // Serial.println(position);
     myservo.write(position);
-    delay(15);
+    delay(stepper_speed);
   }
 }
 
