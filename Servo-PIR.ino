@@ -18,7 +18,7 @@ void setup()
   delay(1000); // Give motor 1 second delay to reach 0 postion on start up
   // Serial.begin(9600); // initialize serial
 }
-void writeServoPosition()
+inline void writeServoPosition()
 {
   myservo.write(position);
   delay(stepper_speed);
@@ -42,4 +42,5 @@ void loop()
       writeServoPosition();
     }
   }
+  delay(2);
 }
