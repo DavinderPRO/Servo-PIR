@@ -15,28 +15,31 @@ void setup()
   pinMode(pirSensor, INPUT); // initialize pirSensor as an input
   myservo.attach(servoPin);  // attaches the servo on pin 9 to the servo object
   myservo.write(position);
+  delay(1000); // Give motor 1 second delay to reach 0 postion on start up
   // Serial.begin(9600); // initialize serial
 }
-
+void writeServoPosition()
+{
+  myservo.write(position);
+  delay(stepper_speed);
+}
 void loop()
 {
   if ((!state && digitalRead(pirSensor) == HIGH) || (state && digitalRead(pirSensor) == LOW))
   {
     state = !state;
-    digitalWrite(led, state);       // turn LED ON
+    digitalWrite(led, state);       // Flip LED
     while (state && position < 180) // goes from 0 degrees to 180 degrees
     {
       position++;
       // Serial.println(position);
-      myservo.write(position);
-      delay(stepper_speed);
+      writeServoPosition();
     }
     while (!state && position > 0) // goes from 180 degrees to 0 degrees
     {
       position--;
       // Serial.println(position);
-      myservo.write(position);
-      delay(stepper_speed);
+      writeServoPosition();
     }
   }
 }
