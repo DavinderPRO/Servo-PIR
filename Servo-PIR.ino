@@ -42,4 +42,5 @@ void loop()
       writeServoPosition();
     }
   }
+  delay(stepper_speed);
 }
