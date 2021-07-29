@@ -15,7 +15,7 @@ void setup()
   pinMode(pirSensor, INPUT); // initialize pirSensor as an input
   myservo.attach(servoPin);  // attaches the servo on pin 9 to the servo object
   myservo.write(position);
-  delay(1000); // Give motor 1 second delay to reach 0 postion on start up
+  delay(2000); // Give motor 2 second delay to reach 0 postion on start up
   // Serial.begin(9600); // initialize serial
 }
 inline void writeServoPosition() __attribute__((always_inline));
