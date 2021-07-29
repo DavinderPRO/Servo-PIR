@@ -18,11 +18,11 @@ void setup()
   delay(2000); // Give motor 2 second delay to reach 0 postion on start up
   // Serial.begin(9600); // initialize serial
 }
-inline void writeServoPosition() __attribute__((always_inline));
-{
-  myservo.write(position);
-  delay(stepper_speed);
-}
+// inline void writeServoPosition()
+// {
+//   myservo.write(position);
+//   delay(stepper_speed);
+// }
 void loop()
 {
   if ((!state && digitalRead(pirSensor) == HIGH) || (state && digitalRead(pirSensor) == LOW))
@@ -33,13 +33,17 @@ void loop()
     {
       position++;
       // Serial.println(position);
-      writeServoPosition();
+      // writeServoPosition();
+      myservo.write(position);
+      delay(stepper_speed);
     }
     while (!state && position > 0) // goes from 180 degrees to 0 degrees
     {
       position--;
       // Serial.println(position);
-      writeServoPosition();
+      // writeServoPosition();
+      myservo.write(position);
+      delay(stepper_speed);
     }
   }
   delay(2);
