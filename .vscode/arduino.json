@@ -1,6 +1,6 @@
 {
-    "sketch": "Servo-PIR.ino",
-    "configuration": "cpu=atmega328",
-    "board": "arduino:avr:diecimila",
-    "port": "COM3"
+  "sketch": "Servo-PIR.ino",
+  "configuration": "cpu=16MHzatmega328",
+  "board": "arduino:avr:pro",
+  "port": "COM7"
 }

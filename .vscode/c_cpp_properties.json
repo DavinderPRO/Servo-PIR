@@ -16,7 +16,7 @@
             "intelliSenseMode": "gcc-x64",
             "includePath": [
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\eightanaloginputs",
                 "C:\\Users\\davinder\\Documents\\Arduino\\libraries\\DFPlayerMini_Fast\\src",
                 "C:\\Users\\davinder\\Documents\\Arduino\\libraries\\FireTimer\\src",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\SoftwareSerial\\src",
@@ -33,7 +33,7 @@
             "defines": [
                 "F_CPU=16000000L",
                 "ARDUINO=10813",
-                "ARDUINO_AVR_DUEMILANOVE",
+                "ARDUINO_AVR_PRO",
                 "ARDUINO_ARCH_AVR",
                 "__DBL_MIN_EXP__=(-125)",
                 "__HQ_FBIT__=15",
