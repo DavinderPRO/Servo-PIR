@@ -3,17 +3,17 @@
 #include "SoftwareSerial.h"
 #include <Servo.h>
 
-#define led (uint8_t)13      // the pin that the LED is atteched to
-#define pirSensor (uint8_t)8 // the pin that the pirSensor is atteched to
-#define servoPin (uint8_t)9  // SHould be digital, Prefer 9,10
+#define led (uint8_t)3       // the pin that the LED is atteched to
+#define pirSensor (uint8_t)9 // the pin that the pirSensor is atteched to
+#define servoPin (uint8_t)10 // SHould be digital, Prefer 9,10
 
-#define mp3Tx (uint8_t)6 // to mp3 rx
-#define mp3Rx (uint8_t)7 // to mp3 tx
+#define mp3Tx (uint8_t)7 // to mp3 rx
+#define mp3Rx (uint8_t)6 // to mp3 tx
 
 #define servoSpeed (uint8_t)15    // the pin that the pirSensor is atteched to
 #define EQ_Preset (uint8_t)2      //Rock
-#define defaultVolume (uint8_t)25 // to mp3 tx
-#define fileToPlay (uint16_t)2    // to mp3 tx
+#define defaultVolume (uint8_t)27 // to mp3 tx
+#define fileToPlay (uint16_t)1    // to mp3 tx
 
 Servo servo;                             // create servo object to control a servo
 SoftwareSerial softSerial(mp3Rx, mp3Tx); // RX, TX
@@ -69,7 +69,7 @@ void loop()
       myDFPlayer.loop(fileToPlay);
       while (position < 180) // goes from 0 degrees to 180 degrees
       {
-        position++;
+        position = position + 5;
         Serial.println(position);
         writeServoPosition();
       }
@@ -78,7 +78,7 @@ void loop()
     {
       while (position > 0) // goes from 180 degrees to 0 degrees
       {
-        position--;
+        position = position - 5;
         Serial.println(position);
         writeServoPosition();
       }
