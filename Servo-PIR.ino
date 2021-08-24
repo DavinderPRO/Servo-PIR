@@ -29,19 +29,19 @@ void setup()
   servo.attach(servoPin);    // attaches the servo on pin 9 to the servo object
   servo.write(position);
   softSerial.begin(9600);
-  Serial.begin(9600); // initialize serial
+  // Serial.begin(9600); // initialize serial
   if (!myDFPlayer.begin(softSerial, true))
   {
-    Serial.println("Unable to begin:");
-    Serial.println("1.Please recheck the connection!");
-    Serial.println("2.Please insert the SD card!");
+    // Serial.println("Unable to begin:");
+    // Serial.println("1.Please recheck the connection!");
+    // Serial.println("2.Please insert the SD card!");
 
     while (true)
     {
       delay(0); // Code to compatible with ESP8266 watch dog.
     }
   }
-  Serial.println("DFPlayer Mini online.");
+  // Serial.println("DFPlayer Mini online.");
   myDFPlayer.EQSelect(EQ_Preset);
   myDFPlayer.volume(defaultVolume); //Set volume value. From 0 to 30
   digitalWrite(led, HIGH);
@@ -65,12 +65,12 @@ void loop()
     if (state)
     {
       myDFPlayer.wakeUp();
-      Serial.println(("sending MP3 loop"));
+      // Serial.println(("sending MP3 loop"));
       myDFPlayer.loop(fileToPlay);
       while (position < 180) // goes from 0 degrees to 180 degrees
       {
         position = position + 2;
-        Serial.println(position);
+        // Serial.println(position);
         writeServoPosition();
       }
     }
@@ -79,10 +79,10 @@ void loop()
       while (position > 0) // goes from 180 degrees to 0 degrees
       {
         position = position - 2;
-        Serial.println(position);
+        // Serial.println(position);
         writeServoPosition();
       }
-      Serial.println(("Stopping mp3"));
+      // Serial.println(("Stopping mp3"));
       myDFPlayer.stop();
       myDFPlayer.sleep();
     }
