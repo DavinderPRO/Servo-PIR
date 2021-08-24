@@ -14,6 +14,7 @@
 #define EQ_Preset (uint8_t)2      //Rock
 #define defaultVolume (uint8_t)27 // to mp3 tx
 #define fileToPlay (uint16_t)1    // to mp3 tx
+#define skipStep (uint16_t)2      // to mp3 tx
 
 Servo servo;                             // create servo object to control a servo
 SoftwareSerial softSerial(mp3Rx, mp3Tx); // RX, TX
@@ -41,14 +42,15 @@ inline void setIndicatorLed(bool level)
   digitalWrite(LED_BUILTIN, level);
 }
 
-inline void setServoMotorMp3player(bool to180Degree)
+inline void setLedServoMp3player(bool state)
 {
-  if (to180Degree)
+  setIndicatorLed(state);
+  if (state)
   {
-    setPlayerMp3Player(to180Degree);
+    setPlayerMp3Player(state);
     while (position < 180) // goes from 0 degrees to 180 degrees
     {
-      position++;
+      position = position + skipStep;
       writeServoPosition();
     }
   }
@@ -56,10 +58,10 @@ inline void setServoMotorMp3player(bool to180Degree)
   {
     while (position > 0) // goes from 180 degrees to 0 degrees
     {
-      position--;
+      position = position - skipStep;
       writeServoPosition();
     }
-    setPlayerMp3Player(to180Degree);
+    setPlayerMp3Player(state);
   }
 }
 
@@ -115,14 +117,17 @@ inline void setupServo()
 {
   servo.attach(servoPin);
   servo.write(position);
+} // setup servo
+inline void setupPIR()
+{
+  pinMode(pirSensor, INPUT); // initialize pirSensor as an input
 }
 
 void setup()
 {
   // Serial.begin(9600); // initialize serial for debugging
   setupIndicators();
-  pinMode(pirSensor, INPUT); // initialize pirSensor as an input
-
+  setupPIR();
   setupServo();
   setupMp3Player();
   blinkIndicator();
@@ -133,7 +138,6 @@ void loop()
   if ((!state && digitalRead(pirSensor) == HIGH) || (state && digitalRead(pirSensor) == LOW))
   {
     state = !state;
-    setIndicatorLed(state);
-    setServoMotorMp3player(state);
+    setLedServoMp3player(state);
   }
 }
