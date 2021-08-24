@@ -69,7 +69,7 @@ void loop()
       myDFPlayer.loop(fileToPlay);
       while (position < 180) // goes from 0 degrees to 180 degrees
       {
-        position = position + 5;
+        position = position + 2;
         Serial.println(position);
         writeServoPosition();
       }
@@ -78,7 +78,7 @@ void loop()
     {
       while (position > 0) // goes from 180 degrees to 0 degrees
       {
-        position = position - 5;
+        position = position - 2;
         Serial.println(position);
         writeServoPosition();
       }
